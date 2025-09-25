@@ -4,21 +4,28 @@
     $prodotto= $_GET['products'];
     $quantita= $_GET['products_number'];
 
-    $iva = $prezzo * 0.22;
-    $totaleIVA = $prezzo + $iva;
-
     $prezzo = 0;
     if($prodotto == "mela")
     {
         $prezzo= 1;
+        $iva = $prezzo * 0.4;
+        $totaleIVA = $prezzo + $iva;
     }else if($prodotto == "banana")
     {
         $prezzo= 2;
+        $iva = $prezzo * 0.4;
+        $totaleIVA = $prezzo + $iva;
     }else{
         $prezzo= 3;
+        $iva = $prezzo * 0.4;
+        $totaleIVA = $prezzo + $iva;
     }
 
-
+    $totale;
+    if($quantita > 10){
+        $sconto = $prezzo - 0.10;
+        $totale = $totaleIVA - $sconto;
+    }
 
 ?>
 
@@ -33,12 +40,15 @@
 <body>
     <?php
 
-        echo"ciao ". $nome. " " . $cognome ;
-        echo" Hai acquistato ". $quantita ." ". $prodotto;
+        echo"ciao ". $nome. " " . $cognome . ", hai acquistato ". $quantita ." ". $prodotto;
         echo"<br>";
         echo "Prezzo senza IVA = ". $prezzo * $quantita.  " euro";
+        echo"<br>";
         echo "Prezzo ivato = ". $totaleIVA * $quantita.  " euro";
+        echo"<br>";
+        if($totale > 0){
+            echo "Prezzo scontato = ". $totale * $quantita.  " euro";
+        }
     ?>
 </body>
 </html>
-

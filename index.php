@@ -1,32 +1,39 @@
 <?php
-    $nome= $_GET['first_name'];
-    $cognome= $_GET['last_name'];
-    $prodotto= $_GET['products'];
-    $quantita= $_GET['products_number'];
-
+    $nome = $_GET['first_name'];
+    $cognome = $_GET['last_name'];
+    $prodotto = $_GET['products'];
+    $quantita = $_GET['products_number'];
+    
     $prezzo = 0;
+    $prezzo_ivato = 0;
+    $spesa = 0;
+    $spesa_ivata = 0;
+    $sconto = 0;
+    $totale = 0;
+
     if($prodotto == "mela")
     {
-        $prezzo= 1;
-        $iva = $prezzo * 0.4;
-        $totaleIVA = $prezzo + $iva;
+        $prezzo = 1;
+        $spesa = $prezzo * $quantita;
+        $prezzo_ivato = $prezzo + 0.04;
+        $spesa_ivata = $prezzo_ivato * $quantita;
+        $sconto = $spesa_ivata * 0.10;
+        $totale = $spesa_ivata - $sconto;
     }else if($prodotto == "banana")
     {
-        $prezzo= 2;
-        $iva = $prezzo * 0.4;
-        $totaleIVA = $prezzo + $iva;
+        $prezzo = 2;
+        $spesa = $prezzo * $quantita;
+        $prezzo_ivato = $prezzo + 0.04;
+        $spesa_ivata = $prezzo_ivato * $quantita;
+        $sconto = $spesa_ivata * 0.10;
+        $totale = $spesa_ivata - $sconto;
     }else{
-        $prezzo= 3;
-        $iva = $prezzo * 0.4;
-        $totaleIVA = $prezzo + $iva;
+        $prezzo = 3;$spesa = $prezzo * $quantita;
+        $prezzo_ivato = $prezzo + 0.04;
+        $spesa_ivata = $prezzo_ivato * $quantita;
+        $sconto = $spesa_ivata * 0.10;
+        $totale = $spesa_ivata - $sconto;
     }
-
-    $totale;
-    if($quantita > 10){
-        $sconto = $prezzo - 0.10;
-        $totale = $totaleIVA - $sconto;
-    }
-
 ?>
 
 
@@ -35,20 +42,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>scontrino</title>
 </head>
 <body>
     <?php
-
-        echo"ciao ". $nome. " " . $cognome . ", hai acquistato ". $quantita ." ". $prodotto;
-        echo"<br>";
-        echo "Prezzo senza IVA = ". $prezzo * $quantita.  " euro";
-        echo"<br>";
-        echo "Prezzo ivato = ". $totaleIVA * $quantita.  " euro";
-        echo"<br>";
-        if($totale > 0){
-            echo "Prezzo scontato = ". $totale * $quantita.  " euro";
-        }
+        echo "Buongiono " . $nome . " " . $cognome . ", ha deciso di acquistare " . $quantita . " " . $prodotto . ".";
+        echo "<br>";
+        echo "<br>";
+        echo "Il costo di ciascuna " . $prodotto . " senza l'IVA è di €" . $prezzo . ".";
+        echo "<br>";
+        echo "Spesa totale senza l'IVA: €" . $spesa . ".";
+        echo "<br>";
+        echo "<br>";
+        echo "Il costo di ciascuna " . $prodotto . " con l'IVA è di €" . $prezzo_ivato;
+        echo "<br>";
+        echo  "Spesa totale con l'IVA: €" . $spesa_ivata . ".";
+        echo "<br>";
+        echo "<br>";
+        echo "Ha diritto a 10% di sconto!";
+        echo "<br>";
+        echo "Costo totale che dovrà pagare €" . $totale . "!";
     ?>
 </body>
 </html>
